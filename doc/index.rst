@@ -3,12 +3,13 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Example's documentation!
-===================================
+Configuration of Rocky Linux System with NI Software for NDS development
+========================================================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   some-feature.md
-   another-feature.md
+   rocky-setup.md
+   NI-software-setup.md
+   otro.rst
