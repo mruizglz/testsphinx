@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NI Software Setup &mdash; IPP Setup of Rocky Linux with NI Hardware 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ni-sync Setup for PXIe 6683h with IEEE1588" href="ni-sync.html" />
+    <link rel="prev" title="Rocky Setup" href="rocky-setup.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            IPP Setup of Rocky Linux with NI Hardware
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rocky-setup.html">Rocky Setup</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">NI Software Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#software-requirements">Software requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#download-software-from-ni">Download Software from NI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-additional-dependencies">Install additional dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-of-ni-packages">Installation of NI Packages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ni-sync.html">ni-sync Setup for PXIe 6683h with IEEE1588</a></li>
+<li class="toctree-l1"><a class="reference internal" href="epics-asyn.html">Installation of EPICS base and asyn module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nds-modules.html">Installation of nds-core and nds-epics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">IPP Setup of Rocky Linux with NI Hardware</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">NI Software Setup</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/NI-software-setup.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ni-software-setup">
+<h1>NI Software Setup<a class="headerlink" href="#ni-software-setup" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Perform the following configuration steps without the PXI chassis connected</p>
+</div>
+<section id="software-requirements">
+<h2>Software requirements<a class="headerlink" href="#software-requirements" title="Link to this heading"></a></h2>
+<p>The installation and compilation of the software needs the installation of the following packages:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>update
+$<span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>config-manager<span class="w"> </span>--set-enabled<span class="w"> </span>crb
+$<span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>epel-release
+$<span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>group<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;Development Tools&quot;</span>
+$<span class="w"> </span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>rsync
+$<span class="w"> </span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>pugixml-devel
+$<span class="w"> </span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>doxygen<span class="w"> </span>graphviz
+</pre></div>
+</div>
+</section>
+<section id="download-software-from-ni">
+<h2>Download Software from NI<a class="headerlink" href="#download-software-from-ni" title="Link to this heading"></a></h2>
+<p>Use the following <a class="reference external" href="https://www.ni.com/es/support/downloads/drivers/download.ni-linux-device-drivers.html#521765">link</a> to download the package to install the NI repository access in your computer. Select version 2024 Q1. Download the file and decompress it in a local folder.</p>
+<a class="reference internal image-reference" href="_images/NILinuxDeviceDrivers2024Q1.png"><img alt="version 2024Q1 selected" src="_images/NILinuxDeviceDrivers2024Q1.png" style="width: 600px;" /></a>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>dnf./<span class="w"> </span>install<span class="w"> </span>./ni-rhel9-drivers-2024Q1.rpm
+</pre></div>
+</div>
+</section>
+<section id="install-additional-dependencies">
+<h2>Install additional dependencies<a class="headerlink" href="#install-additional-dependencies" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>chkconfig
+</pre></div>
+</div>
+</section>
+<section id="installation-of-ni-packages">
+<h2>Installation of NI Packages<a class="headerlink" href="#installation-of-ni-packages" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>ni-pxiplatformservices
+$<span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>ni-visa
+$<span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>ni-sync
+$<span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>ni-flexrio
+$<span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>ni-rseries
+$<span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>ni-syscfg-devel
+$<span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>ni-hwcfg-utility
+$<span class="w"> </span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>ni-flexrio-modulario-libs-devel
+</pre></div>
+</div>
+<p>The kernel modules used by NI needs to compiled and installed, use this command to do it</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>dkms<span class="w"> </span>autoinstall
+</pre></div>
+</div>
+<p>Verify that the NI HW Configuration utiliy run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ni-hwcfg-utility
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/NI-hw-configuration-utility.png"><img alt="" src="_images/NI-hw-configuration-utility.png" style="width: 600px;" /></a>
+<p>Reboot the system</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>After reboot the configuration of the network can be altered by the installation of the ni-sync module. Verify that ethernet interfaces are not changed</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Connect the PXIe chassis with the PXIe 6683h and the R-Series device inserted in the corresponding slots.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>After booting the system verify the ethernet interfaces and configure the PXIe 6683h with an IPv4 adrres, netmask, gateway. The ethernet interface needs to be connected to a IEEE1588 netowrk with a master.</p>
+</div>
+<p>Verification of the hardware installed</p>
+<dl class="simple">
+<dt>..note::</dt><dd><p>This output will be different depending on the hardware available in your system</p>
+</dd>
+</dl>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>lsni<span class="w"> </span>-v
+
+<span class="w">     </span>Scanning<span class="w"> </span>localhost<span class="w"> </span><span class="k">for</span><span class="w"> </span>devices...
+
+<span class="hll"><span class="w">     </span>System<span class="w"> </span>Configuration<span class="w"> </span>API<span class="w"> </span>Experts<span class="w"> </span>found:
+</span><span class="hll"><span class="w">     </span>NI<span class="w"> </span>Device<span class="w"> </span>Interconnect<span class="w"> </span>Manager<span class="w"> </span><span class="m">24</span>.0.0<span class="w"> </span><span class="o">(</span>nidim<span class="o">)</span>
+</span><span class="hll"><span class="w">     </span>NI-CONTROLLER<span class="w"> </span><span class="m">24</span>.0<span class="w"> </span><span class="o">(</span>ni-controller<span class="o">)</span>
+</span><span class="hll"><span class="w">     </span>NI<span class="w"> </span>Network<span class="w"> </span>Browser<span class="w"> </span><span class="m">24</span>.0<span class="w"> </span><span class="o">(</span>network<span class="o">)</span>
+</span><span class="hll"><span class="w">     </span>niflexrio2<span class="w"> </span><span class="m">24</span>.0.0<span class="w"> </span><span class="o">(</span>niflexrio2<span class="o">)</span>
+</span><span class="hll"><span class="w">     </span>NIFLEXRIO<span class="w"> </span><span class="m">24</span>.0.0<span class="w"> </span><span class="o">(</span>niflexrio<span class="o">)</span>
+</span><span class="hll"><span class="w">     </span>NI<span class="w"> </span>MX<span class="w"> </span>Routing<span class="w"> </span>Utility<span class="w"> </span><span class="m">24</span>.0.0<span class="w"> </span><span class="o">(</span>nimru<span class="o">)</span>
+</span><span class="hll"><span class="w">     </span>NI-MXI<span class="w"> </span><span class="m">24</span>.0<span class="w"> </span><span class="o">(</span>ni-mxi<span class="o">)</span>
+</span><span class="hll"><span class="w">     </span>NI<span class="w"> </span>PXI<span class="w"> </span>Platform<span class="w"> </span>Services<span class="w"> </span><span class="m">24</span>.0<span class="w"> </span><span class="o">(</span>ni-pxi<span class="o">)</span>
+</span><span class="hll"><span class="w">     </span>NI-QPXI<span class="w"> </span><span class="m">24</span>.0<span class="w"> </span><span class="o">(</span>ni-qpxi<span class="o">)</span>
+</span><span class="hll"><span class="w">     </span>NI-RIO<span class="w"> </span><span class="m">24</span>.0.0<span class="w"> </span><span class="o">(</span>ni-rio<span class="o">)</span>
+</span><span class="hll"><span class="w">     </span>NI-Sync<span class="w"> </span><span class="m">23</span>.8<span class="w"> </span><span class="o">(</span>ni-sync<span class="o">)</span>
+</span><span class="hll"><span class="w">     </span>NI<span class="w"> </span>System<span class="w"> </span>Configuration<span class="w"> </span><span class="m">24</span>.0<span class="w"> </span><span class="o">(</span>nisyscfg<span class="o">)</span>
+</span><span class="hll"><span class="w">     </span>NI-VISA<span class="w"> </span><span class="m">24</span>.0<span class="w"> </span><span class="o">(</span>ni-visa<span class="o">)</span>
+</span>
+<span class="w">     </span>System<span class="w"> </span>Configuration<span class="w"> </span>API<span class="w"> </span>resources<span class="w"> </span>found:
+<span class="w">     </span>rocky93ipp
+<span class="w">     </span>--Primary<span class="w"> </span>Expert:<span class="w">       </span>NI<span class="w"> </span>System<span class="w"> </span>Configuration<span class="w"> </span><span class="m">24</span>.0
+<span class="w">     </span>--Model<span class="w"> </span>Name:<span class="w">           </span>B85M-D3H
+
+<span class="w">     </span>Ethernet<span class="w"> </span>Adapter<span class="w"> </span>enp6s0
+<span class="w">     </span>--Primary<span class="w"> </span>Expert:<span class="w">       </span>NI<span class="w"> </span>System<span class="w"> </span>Configuration<span class="w"> </span><span class="m">24</span>.0
+
+<span class="w">     </span>ASRL1::INSTR
+<span class="w">     </span>--Primary<span class="w"> </span>Expert:<span class="w">       </span>NI-VISA<span class="w"> </span><span class="m">24</span>.0
+
+<span class="w">     </span>ASRL2::INSTR
+<span class="w">     </span>--Primary<span class="w"> </span>Expert:<span class="w">       </span>NI-VISA<span class="w"> </span><span class="m">24</span>.0
+
+<span class="w">     </span>ASRL4::INSTR
+<span class="w">     </span>--Primary<span class="w"> </span>Expert:<span class="w">       </span>NI-VISA<span class="w"> </span><span class="m">24</span>.0
+
+<span class="w">     </span>ASRL5::INSTR
+<span class="w">     </span>--Primary<span class="w"> </span>Expert:<span class="w">       </span>NI-VISA<span class="w"> </span><span class="m">24</span>.0
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rocky-setup.html" class="btn btn-neutral float-left" title="Rocky Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ni-sync.html" class="btn btn-neutral float-right" title="ni-sync Setup for PXIe 6683h with IEEE1588" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright IPP and UPM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
