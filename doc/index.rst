@@ -10,6 +10,8 @@ Configuration of Rocky Linux System with NI Software for NDS development
    :maxdepth: 2
    :caption: Contents:
 
-   rocky-setup.md
-   NI-software-setup.md
-   otro.rst
+   rocky-setup.rst
+   NI-software-setup.rst
+   ni-sync.rst
+   epics-asyn.rst
+   nds-modules.rst

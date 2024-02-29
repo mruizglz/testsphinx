@@ -6,9 +6,9 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'Example'
-copyright = 'workshop participant'
-author = 'workshop participant'
+project = 'IPP Setup of Rocky Linux with NI Hardware'
+copyright = 'IPP and UPM'
+author = 'UPM '
 release = '0.1'
 
 

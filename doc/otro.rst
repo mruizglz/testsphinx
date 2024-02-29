@@ -1,4 +1,0 @@
-otro
-====
-**prueba**
-**otro**
